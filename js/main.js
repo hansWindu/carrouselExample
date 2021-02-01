@@ -9,11 +9,17 @@ let pagina = 1;
 
 function avanzarFoto() {
     pagina = pagina + 1;
+    if (imagenes.length + 1 <= pagina) {
+        pagina = 1
+    }
     render();
 }
 
 function retrocederFoto() {
     pagina = pagina - 1;
+    if (0 === pagina){
+        pagina = imagenes.length
+    }
     render();
 }
 
@@ -24,6 +30,5 @@ function render() {
 // eventos
 botonAvanzar.addEventListener('click', avanzarFoto)
 botonRetroceder.addEventListener('click', retrocederFoto)
-
 // inicio
 render();
