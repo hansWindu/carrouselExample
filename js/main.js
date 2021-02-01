@@ -2,10 +2,17 @@
 const objetoImg = document.querySelector('#imagen')
 const botonAvanzar = document.querySelector('#avanzar')
 const botonRetroceder = document.querySelector('#retroceder')
+const templateCirculo = document.querySelector('#templateCirculos').content.firstElementChild;
+const circulos = document.querySelector('#circulos')
 const imagenes = ['img/1.jpg', 'img/2.jfif', 'img/3.jfif']
 let pagina = 1;
 
 // functions
+
+function cambiarPagina (nuevaPagina) {
+    pagina = nuevaPagina;
+    render();
+}
 
 function avanzarFoto() {
     pagina = pagina + 1;
@@ -24,7 +31,22 @@ function retrocederFoto() {
 }
 
 function render() {
+    // Imagen
     objetoImg.setAttribute('src', imagenes[pagina - 1])
+    // Circulitos
+    circulos.textContent = ''
+    imagenes.forEach(function(imagen, indice) {
+        const nuevoCirculo = templateCirculo.cloneNode(true);
+        nuevoCirculo.addEventListener('click', function() {
+            cambiarPagina(indice + 1)
+        });
+        // Marcamos el que coincide con la pagina
+        if(pagina - 1 === indice){
+            nuevoCirculo.setAttribute('checked', true)
+        }
+        // Mostramos
+        circulos.appendChild(nuevoCirculo)
+    })
 }
 
 // eventos
