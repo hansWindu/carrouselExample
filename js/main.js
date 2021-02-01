@@ -4,10 +4,25 @@ const botonAvanzar = document.querySelector('#avanzar')
 const botonRetroceder = document.querySelector('#retroceder')
 const templateCirculo = document.querySelector('#templateCirculos').content.firstElementChild;
 const circulos = document.querySelector('#circulos')
+const botonParar = document.querySelector('#parar')
+const botonAutoPlay = document.querySelector('#autoplay')
+let intervalo = null
+const tiempoIntervaloSeg = 1;
 const imagenes = ['img/1.jpg', 'img/2.jfif', 'img/3.jfif']
 let pagina = 1;
 
 // functions
+
+function activarAutoPlay() {
+    intervalo = setInterval(function (){
+        avanzarFoto();
+    }, tiempoIntervaloSeg * 1000)
+}
+
+function desactivarAutoPlay() {
+    clearInterval(intervalo);
+    intervalo = null
+}
 
 function cambiarPagina (nuevaPagina) {
     pagina = nuevaPagina;
@@ -52,5 +67,8 @@ function render() {
 // eventos
 botonAvanzar.addEventListener('click', avanzarFoto)
 botonRetroceder.addEventListener('click', retrocederFoto)
+botonAutoPlay.addEventListener('click', activarAutoPlay)
+botonParar.addEventListener('click', desactivarAutoPlay)
+// botonParar.addEventListener('click', )
 // inicio
 render();
